@@ -1,4 +1,3 @@
-from .screen_view import ScreenView
-from .sprites_view import SpritesView
+from .game_view import GameView
 
-__all__ = ["ScreenView", "SpritesView"]
+__all__ = ["GameView"]

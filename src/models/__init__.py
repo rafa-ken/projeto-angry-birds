@@ -1,12 +1,7 @@
-from .bird_model import BirdModel
-from .planet_model import PlanetModel
-from .slingshot_model import SlingshotModel
-from .obstacle_model import ObstacleModel
-
+from .characters_model import CharacterModel
+from .polygon_model import PolygonModel
 
 __all__ = [
-    "BirdModel",
-    "PlanetModel",
-    "SlingshotModel",
-    "ObstacleModel",
+    'CharacterModel',
+    'PolygonModel'
 ]

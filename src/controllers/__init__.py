@@ -1,3 +1,3 @@
-from .game_controller import *
-from .slingshot_controller import *
-__all__ = []
+from .game_controller import GameController
+
+__all__ = ["GameController"]

@@ -1,14 +1,8 @@
-import pygame
-from controllers import GameController, SlingshotController
-from services import GameLoopService
-
-def main():
-    pygame.init()
-    slingshot_controller = SlingshotController()
-    game_controller = GameController()
-    game_loop = GameLoopService(game_controller)
-    game_loop.start()
-    pygame.quit()
+from controllers import GameController
 
 if __name__ == "__main__":
-    main()
+    # Initialize the game controller
+    game_controller = GameController()
+
+    # Start the game
+    game_controller.start_game()
