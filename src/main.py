@@ -35,7 +35,7 @@ rect = pygame.Rect(142, 365, 130, 100)
 next_button = buttons.subsurface(rect).copy()
 rect = pygame.Rect(18, 212, 100, 100)
 play_button = buttons.subsurface(rect).copy()
-level = Level()
+
 # Initialize game clock
 clock = pygame.time.Clock()
 

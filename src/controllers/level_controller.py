@@ -55,6 +55,31 @@ class Level:
             p = (x, y + 85 + i * 85)
             self.columns.append(Polygon(p, 20, 85, self.space))
 
+    def build_0(self):
+        """Level 0 setup."""
+        pig1 = Pig(900, 100, self.space)
+        self.pigs.append(pig1)
+
+        self.columns.append(Polygon((920, 120), 20, 85))
+        self.beams.append(Polygon((900, 180), 85, 20))
+
+        self.number_of_birds = 4
+        if self.bool_space:
+            self.number_of_birds = 8
+
+    def build_1(self):
+        """Level 1 setup."""
+        pig1 = Pig(800, 200, self.space)
+        pig2 = Pig(1000, 250, self.space)
+        self.pigs.append(pig1)
+        self.pigs.append(pig2)
+
+        self.columns.append(Polygon((820, 220), 20, 85))
+        self.beams.append(Polygon((1000, 300), 85, 20))
+
+        self.number_of_birds = 3
+        if self.bool_space:
+            self.number_of_birds = 6
 
     def build_2(self):
         """Level 2 setup."""
@@ -62,11 +87,11 @@ class Level:
         self.pigs.append(pig1)
         pig2 = Pig(1000, 230, self.space)
         self.pigs.append(pig2)
-        self.columns.append(Polygon((880, 80), 20, 85, self.space))
-        self.beams.append(Polygon((880, 150), 85, 20, self.space))
-        self.columns.append(Polygon((1000, 80), 20, 85, self.space))
-        self.columns.append(Polygon((1000, 180), 20, 85, self.space))
-        self.beams.append(Polygon((1000, 210), 85, 20, self.space))
+        self.columns.append(Polygon((880, 80), 20, 85))
+        self.beams.append(Polygon((880, 150), 85, 20))
+        self.columns.append(Polygon((1000, 80), 20, 85))
+        self.columns.append(Polygon((1000, 180), 20, 85))
+        self.beams.append(Polygon((1000, 210), 85, 20))
         self.number_of_birds = 4
         if self.bool_space:
             self.number_of_birds = 8
