@@ -1,8 +1,8 @@
 from .characters_model import Bird, Pig
-from .polygon_model import PolygonModel
+from .polygon_model import Polygon
 
 __all__ = [
     'Bird',
     'Pig',
-    'PolygonModel',
+    'Polygon',
 ]

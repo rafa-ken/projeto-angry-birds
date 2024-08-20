@@ -1,3 +1,3 @@
-from .game_controller import GameController
+from .level_controller import Level
 
-__all__ = ["GameController"]
+__all__ = ["Level"]
