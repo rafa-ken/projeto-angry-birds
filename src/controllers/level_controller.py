@@ -79,14 +79,6 @@ class Level():
         if self.bool_space:
             self.number_of_birds = 8
 
-        # Add the moon to the space
-        self.space.add(self.moon)
-
-        # Apply the moon's gravitational force to birds
-        for bird in self.space.bodies:
-            if isinstance(bird, Bird):
-                self.moon.apply_gravity(bird)
-
     def load_level(self):
         try:
             build_name = "build_"+str(self.number)
