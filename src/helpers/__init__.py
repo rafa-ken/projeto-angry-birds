@@ -7,6 +7,7 @@ from .vectors import (
     vec_normalize,
     vec_dot
 )
+from .pysics_manager import PhysicsManager
 
 __all__ = [
     "vec_add",
@@ -15,5 +16,6 @@ __all__ = [
     "vec_rotate",
     "vec_length",
     "vec_normalize",
-    "vec_dot"
+    "vec_dot",
+    "PhysicsManager"
 ]

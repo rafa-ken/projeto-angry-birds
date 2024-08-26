@@ -1,75 +1,40 @@
-import pygame
-import math
-from helpers import (
-    vec_add,
-    vec_sub,
-    vec_scale,
-    vec_rotate,
-    vec_length,
-    vec_normalize,
-    vec_dot
-)
+import pymunk as pm
+from pymunk import Vec2d
 
-class Bird:
+
+class Bird():
     def __init__(self, distance, angle, x, y, space):
         self.life = 20
         mass = 5
         radius = 12
-        inertia = mass * radius ** 2
-        self.body_position = [x, y]
-        self.body_velocity = [0, 0]
+        inertia = pm.moment_for_circle(mass, 0, radius, (0, 0))
+        body = pm.Body(mass, inertia)
+        body.position = x, y
         power = distance * 53
-        impulse = vec_rotate([power, 0], -angle)
-        self.apply_impulse(impulse)
-        self.shape_radius = radius
-        self.shape_elasticity = 0.95
-        self.shape_friction = 1
-        space.append(self)
-
-    def apply_impulse(self, impulse):
-        # Assuming a simple model where impulse directly translates to velocity change
-        self.body_velocity = vec_add(self.body_velocity, vec_scale(impulse, 1/5))
-
-    def update_position(self, dt):
-        # Update the position based on velocity and time step
-        self.body_position = vec_add(self.body_position, vec_scale(self.body_velocity, dt))
-
-    def draw(self, screen):
-        p = self.to_pygame(self.body_position)
-        angle_degrees = math.degrees(math.atan2(self.body_velocity[1], self.body_velocity[0]))
-        rotated_image = pygame.transform.rotate(self.image, angle_degrees)
-        offset = vec_scale(rotated_image.get_size(), 0.5)
-        p = vec_sub(p, offset)
-        screen.blit(rotated_image, (p[0], p[1]))
-
-    def to_pygame(self, p):
-        return [int(p[0]), int(p[1])]
+        impulse = power * Vec2d(1, 0)
+        angle = -angle
+        body.apply_impulse_at_local_point(impulse.rotated(angle))
+        shape = pm.Circle(body, radius, (0, 0))
+        shape.elasticity = 0.95
+        shape.friction = 1
+        shape.collision_type = 0
+        space.add(body, shape)
+        self.body = body
+        self.shape = shape
 
 
-class Pig:
+class Pig():
     def __init__(self, x, y, space):
         self.life = 20
         mass = 5
         radius = 14
-        inertia = mass * radius ** 2
-        self.body_position = [x, y]
-        self.body_velocity = [0, 0]
-        self.shape_radius = radius
-        self.shape_elasticity = 0.95
-        self.shape_friction = 1
-        space.append(self)
-
-    def update_position(self, dt):
-        # Update the position based on velocity and time step
-        self.body_position = vec_add(self.body_position, vec_scale(self.body_velocity, dt))
-
-    def draw(self, screen):
-        p = self.to_pygame(self.body_position)
-        angle_degrees = math.degrees(math.atan2(self.body_velocity[1], self.body_velocity[0]))
-        rotated_image = pygame.transform.rotate(self.image, angle_degrees)
-        offset = vec_scale(rotated_image.get_size(), 0.5)
-        p = vec_sub(p, offset)
-        screen.blit(rotated_image, (p[0], p[1]))
-
-    def to_pygame(self, p):
-        return [int(p[0]), int(p[1])]
+        inertia = pm.moment_for_circle(mass, 0, radius, (0, 0))
+        body = pm.Body(mass, inertia)
+        body.position = x, y
+        shape = pm.Circle(body, radius, (0, 0))
+        shape.elasticity = 0.95
+        shape.friction = 1
+        shape.collision_type = 1
+        space.add(body, shape)
+        self.body = body
+        self.shape = shape
