@@ -24,6 +24,7 @@ class Game:
         self.sling_image = pygame.image.load("./resources/images/sling-3.png").convert_alpha()
         self.buttons = pygame.image.load("./resources/images/selected-buttons.png").convert_alpha()
         self.pig_happy = pygame.image.load("./resources/images/pig_failed.png").convert_alpha()
+        self.pig_happy = pygame.transform.scale(self.pig_happy, (50, 50))
         self.stars = pygame.image.load("./resources/images/stars-edited.png").convert_alpha()
 
         # Subsurfaces for star images
