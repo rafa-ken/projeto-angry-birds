@@ -15,6 +15,10 @@ class Game:
         self.space.gravity = (0.0, -700.0)
 
         # Load images
+        self.sprite_sheet = pygame.image.load("./resources/images/angry_birds.png").convert_alpha()
+        moon_rect = pygame.Rect(0, 800, 350, 350)
+        self.moon_image = self.sprite_sheet.subsurface(moon_rect)
+        self.big_bird= pygame.transform.scale(self.moon_image, (4600, 120))
         self.redbird = pygame.image.load("./resources/images/red-bird3.png").convert_alpha()
         self.background = pygame.image.load("./resources/images/background3.png").convert_alpha()
         self.sling_image = pygame.image.load("./resources/images/sling-3.png").convert_alpha()
@@ -116,10 +120,42 @@ class Game:
             self.moon.handle_collision(bird)
 
     def draw_game(self):
-        self.screen.fill((130, 200, 100))
-        self.screen.blit(self.background, (0, -50))
-        # Draw slingshot, birds, pigs, moon, etc.
-        # The drawing code similar to the original code but organized within this method
+        # Clear the screen and draw the background
+        self.screen.fill((130, 200, 100))  # Fill with a solid color (background)
+        self.screen.blit(self.background, (0, -50))  # Draw the background image
+
+        # Draw all static objects (e.g., blocks and beams)
+        for column in self.columns:
+            column.draw_poly('columns', self.screen)
+        for beam in self.beams:
+            beam.draw_poly('beams', self.screen)
+
+        # Draw the moon (as a pygame sprite)
+        self.screen.blit(self.big_bird, (600, 300))
+
+        # Draw all birds
+        for bird in self.birds:
+            bird_pos = bird.shape.body.position
+            bird_rect = self.redbird.get_rect(center=(int(bird_pos.x), int(-bird_pos.y + 600)))
+            self.screen.blit(self.redbird, bird_rect.topleft)
+
+        # Draw all pigs
+        for pig in self.pigs:
+            pig_pos = pig.shape.body.position
+            pig_rect = self.pig_happy.get_rect(center=(int(pig_pos.x), int(-pig_pos.y + 600)))
+            self.screen.blit(self.pig_happy, pig_rect.topleft)
+
+        # Draw the slingshot (if applicable)
+        rect = pygame.Rect(50, 0, 70, 220)
+        self.screen.blit(self.sling_image, (138, 420), rect)
+
+        # Draw additional elements like score, UI, etc.
+        score_font = self.bold_font.render("SCORE", 1, (255, 255, 255))
+        number_font = self.bold_font.render(str(self.score), 1, (255, 255, 255))
+        self.screen.blit(score_font, (1060, 90))
+        self.screen.blit(number_font, (1060, 130))
+
+        # Update the display
         pygame.display.flip()
 
     def post_solve_bird_pig(self, arbiter, space, _):
