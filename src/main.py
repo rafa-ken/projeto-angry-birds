@@ -167,6 +167,7 @@ class Game:
             self.mouse_pressed = False
 
     def draw_game(self):
+        # Clear the screen and draw the background
         self.screen.fill((130, 200, 100))  # Fill with a solid color (background)
         self.screen.blit(self.background, (0, -50))  # Draw the background image
 
@@ -182,6 +183,12 @@ class Game:
 
         # Draw the moon (big yellow bird)
         self.screen.blit(self.moon.image, self.moon.rect.topleft)
+
+        # Draw the birds near the slingshot (waiting to be launched)
+        if self.level.number_of_birds > 0:
+            for i in range(self.level.number_of_birds - 1):
+                x = 100 - (i * 35)
+                self.screen.blit(self.redbird, (x, 508))
 
         # Draw all birds that are in flight
         for bird in self.birds:
@@ -209,6 +216,7 @@ class Game:
 
         # Update the display
         pygame.display.flip()
+
 
 
     def sling_action(self):
