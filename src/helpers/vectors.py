@@ -1,31 +1,26 @@
-import math
+    
+def vector(p0, p1):
+        """Return the vector of the points
+        p0 = (xo,yo), p1 = (x1,y1)"""
+        a = p1[0] - p0[0]
+        b = p1[1] - p0[1]
+        return (a, b)
 
-def vec_add(v1, v2):
-    return [v1[0] + v2[0], v1[1] + v2[1]]
 
-def vec_sub(v1, v2):
-    return [v1[0] - v2[0], v1[1] - v2[1]]
+def unit_vector(v):
+    """Return the unit vector of the points
+    v = (a,b)"""
+    h = ((v[0]**2)+(v[1]**2))**0.5
+    if h == 0:
+        h = 0.000000000000001
+    ua = v[0] / h
+    ub = v[1] / h
+    return (ua, ub)
 
-def vec_scale(v, scalar):
-    return [v[0] * scalar, v[1] * scalar]
 
-def vec_rotate(v, angle_degrees):
-    angle_radians = math.radians(angle_degrees)
-    cos_angle = math.cos(angle_radians)
-    sin_angle = math.sin(angle_radians)
-    return [
-        v[0] * cos_angle - v[1] * sin_angle,
-        v[0] * sin_angle + v[1] * cos_angle
-    ]
-
-def vec_length(v):
-    return math.sqrt(v[0]**2 + v[1]**2)
-
-def vec_normalize(v):
-    length = vec_length(v)
-    if length == 0:
-        return [0, 0]
-    return [v[0] / length, v[1] / length]
-
-def vec_dot(v1, v2):
-    return v1[0] * v2[0] + v1[1] * v2[1]
+def distance(xo, yo, x, y):
+    """distance between points"""
+    dx = x - xo
+    dy = y - yo
+    d = ((dx ** 2) + (dy ** 2)) ** 0.5
+    return d
